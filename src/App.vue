@@ -1,16 +1,18 @@
 <template>
   <div id="app">
-    <test msg='Hello'></test>
+<!--     <test msg='Hello'></test> -->
+    <users></users>
     <router-view/>
   </div>
 </template>
 
 <script>
 import Test from './components/test'
+import Users from './components/Users'
 export default {
   name: 'App',
   components: {
-    Test
+    Test, Users
   }
 }
 </script>
