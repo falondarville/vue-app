@@ -16,6 +16,7 @@
 				<!-- if user is contacted, give class of contacted -->
 				<span :class='{contacted: user.contacted}'>
 					{{user.name}} : {{user.email}}
+					<button v-on:click='deleteUser(user)'>x</button>
 				</span>
 			</li>
 		</ul>
@@ -28,23 +29,7 @@
 		data() {
 			return {
 				newUser: {},
-				users: [
-					{
-						name: 'John Doe',
-						email: 'jdoe@gmail.com',
-						contacted: false
-					},
-					{
-						name: 'Steve Smith',
-						email: 'steve@gmail.com',
-						contacted: false
-					},
-					{					
-						name: 'Tom White',
-						email: 'tom@gmail.com',
-						contacted: false
-					}
-				]
+				users: []
 			}
 		},
 		methods: {
@@ -55,9 +40,17 @@
 					contacted: false
 				});
 				e.preventDefault();
+			},
+			deleteUser: function(user){
+				this.users.splice(this.users.indexOf(user), 1);
 			}
+		},
+		// using vue resourse to get API data
+		created: function(){
+			this.$http.get(`https://jsonplaceholder.typicode.com/users`).then(function(response){
+				this.users = response.data;
+			})
 		}
-
 }
 
 </script>
